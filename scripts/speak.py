@@ -43,6 +43,7 @@ class speakNode():
         if self.old_waypoint_id != self.waypoint_id:
             play_sound = self.auto_sound.play()
             play_sound.wait_done()
+            self.old_waypoint_id = self.waypoint_id
 
         if self.waypoint_key =="end":
             play_sound =self.goal_sound.play()
