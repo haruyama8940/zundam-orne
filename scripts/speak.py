@@ -11,7 +11,7 @@ from waypoint_manager_msgs.msg import Waypoint
 
 class speakNode():
     def __init__(self):
-        self.sub = rospy.Subscriber('waypoint', String, self.waypoint_callback)
+        self.sub = rospy.Subscriber('waypoint', Waypoint, self.waypoint_callback)
         self.srv = rospy.Service('test_speak', SetBool, self.callback_srv) 
         self.goal_sound =simpleaudio.WaveObject.from_wave_file(roslib.packages.get_pkg_dir('zundam_orne')+'/voice/goal.wav')
         self.white_sound =simpleaudio.WaveObject.from_wave_file(roslib.packages.get_pkg_dir('zundam_orne') +'/voice/white.wav')
