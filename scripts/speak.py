@@ -13,10 +13,10 @@ class speakNode():
     def __init__(self):
         self.sub = rospy.Subscriber('waypoint', Waypoint, self.waypoint_callback)
         self.srv = rospy.Service('test_speak', SetBool, self.callback_srv) 
-        self.goal_sound =simpleaudio.WaveObject.from_wave_file(roslib.packages.get_pkg_dir('zundam_orne')+'/voice/goal.wav')
-        self.white_sound =simpleaudio.WaveObject.from_wave_file(roslib.packages.get_pkg_dir('zundam_orne') +'/voice/white.wav')
-        self.akete_sound =simpleaudio.WaveObject.from_wave_file(roslib.packages.get_pkg_dir('zundam_orne') +'/voice/akete.wav')
-        self.auto_sound =simpleaudio.WaveObject.from_wave_file(roslib.packages.get_pkg_dir('zundam_orne')+'/voice/auto.wav')
+        self.seg_sound =simpleaudio.WaveObject.from_wave_file(roslib.packages.get_pkg_dir('zundam_orne')+'/voice/seg.wav')
+        self.akete_sound =simpleaudio.WaveObject.from_wave_file(roslib.packages.get_pkg_dir('zundam_orne') +'/voice/obs.wav')
+        self.auto_sound =simpleaudio.WaveObject.from_wave_file(roslib.packages.get_pkg_dir('zundam_orne')+'/voice/waypoint.wav')
+        #self.traf_sound =simpleaudio.WaveObject.from_wave_file(roslib.packages.get_pkg_dir('zundam_orne')+'/voice/traf.wav')
  
         self.waypoint_id = 1
         self.old_waypoint_id = 0
@@ -35,19 +35,20 @@ class speakNode():
             play_sound = self.auto_sound.play()
             play_sound.wait_done()
 
-    def spaeck_function(self):
-        if self.waypoint_key == "white":
-            play_sound = self.white_sound.play()
-            play_sound.wait_done()
+    def speck_function(self):
+        # if self.waypoint_key == "white":
+        #     play_sound = self.white_sound.play()
+        #     play_sound.wait_done()
 
-        if self.old_waypoint_id != self.waypoint_id:
-            play_sound = self.auto_sound.play()
-            play_sound.wait_done()
-            self.old_waypoint_id = self.waypoint_id
+        # if self.old_waypoint_id != self.waypoint_id:
+        #     play_sound = self.auto_sound.play()
+        #     play_sound.wait_done()
+        #     self.old_waypoint_id = self.waypoint_id
 
-        if self.waypoint_key =="end":
-            play_sound =self.goal_sound.play()
-            play_sound.wait_done()
+        # if self.waypoint_key =="end":
+        #     play_sound =self.goal_sound.play()
+        #     play_sound.wait_done()
+        print("hiroyuki")
 
 if __name__ == '__main__':
     rospy.init_node('test_node')
@@ -56,5 +57,5 @@ if __name__ == '__main__':
     speak_node = speakNode()
     print("ready")
     while not rospy.is_shutdown():
-        speak_node.spaeck_function()       
+        speak_node.speck_function()       
         rospy.sleep(1.0)
